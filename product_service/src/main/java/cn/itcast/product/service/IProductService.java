@@ -1,6 +1,7 @@
 package cn.itcast.product.service;
 
 import cn.itcast.product.entity.Product;
+import cn.itcast.tools.ResultMsg;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,11 @@ import java.util.List;
 @RequestMapping("/product")
 public interface IProductService {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    Product findById(@PathVariable Long id);
+    ResultMsg findById(@PathVariable Long id);
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    Product save(@RequestBody Product product);
+    ResultMsg save(@RequestBody Product product);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    List<Product> findAll();
+    ResultMsg findAll();
 }

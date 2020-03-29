@@ -1,4 +1,4 @@
-package cn.itcast.bean;
+package cn.itcast.bean.anno;
 
 import org.springframework.context.annotation.Import;
 
