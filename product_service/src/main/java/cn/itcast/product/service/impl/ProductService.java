@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,14 +17,17 @@ import java.util.List;
 public class ProductService implements IProductService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
 
-    @Autowired
-    private ProductDao productDao;
+    private final ProductDao productDao;
 
     @Value("${spring.cloud.client.ip-address}")
     private String ip;
 
     @Value("${server.port}")
     private String port;
+
+    public ProductService(ProductDao productDao) {
+        this.productDao = productDao;
+    }
 
     @Override
     public Product findById(Long id) {
@@ -39,11 +43,17 @@ public class ProductService implements IProductService {
     @Override
     @Transactional
     public Product save(Product product) {
+        LOGGER.info("[query KPI] ProductService save start. product: {}.", product);
+        if (StringUtils.isEmpty(product.getId())) {
+            productDao.insertObject(product);
+            return new Product("添加成功", 1);
+        }
         return productDao.saveOrUpdate(product);
     }
 
     @Override
     public List<Product> findAll() {
+        LOGGER.info("[query KPI] ProductService findAll start.");
         return productDao.findAll();
     }
 }

@@ -31,4 +31,12 @@ public class Product {
     private String caption;
 
     private Integer inventory;
+
+    public Product() {
+    }
+
+    public Product(String productName, Integer status) {
+        this.productName = productName;
+        this.status = status;
+    }
 }

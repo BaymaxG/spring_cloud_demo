@@ -24,7 +24,7 @@ public abstract class AbstractDao<T> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void insertObj(T obj) {
+    public void insertObject(T obj) {
         EntityManager manager = getEntityManager();
         manager.persist(obj);
         manager.flush();
