@@ -1,0 +1,31 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: service-order
+myUrl: http://localhost:9001/product/
+logging:
+  level:
+    root: debug
+# 配置客户端,注册到eureka中
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+  instance:
+    prefer-ip-address: true #使用IP地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心注册服务id
+    lease-renewal-interval-in-seconds: 30 #服务续约时间，默认30s
+    lease-expiration-duration-in-seconds: 90 #服务失效时间，默认90s
+# 修改ribbon的负载均衡策略: 服务名.ribbon.NFLoadBalancerRuleClassName:策略
+service-product:
+  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡策略
+    ConnectTimeout: 250 # ribbon的连接超时时间
+    ReadTimeout: 1000 # ribbon的数据读取超时时间
+    OkToRetryOnAllOperations: true # 是否对所有操作都重试
+    MaxAutoRetriesNextServer: 1 #切换实例的重试次数
+    MaxAutoReties: 1 # 对当前实例的重试次数
+feign:
+  hystrix:
+    enabled: true # 开启feign对hystrix的支持

@@ -1,0 +1,27 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: service-product
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cmr_dev_db?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    show-sql: true
+    open-in-view: true
+logging:
+  level:
+    cn.jay.repository: trace
+#配置客户端,注册到eureka中
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+  instance:
+    prefer-ip-address: true #使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心注册服务id
+    lease-renewal-interval-in-seconds: 5 #服务续约时间，默认30s
+    lease-expiration-duration-in-seconds: 10 #服务失效时间，默认90s
