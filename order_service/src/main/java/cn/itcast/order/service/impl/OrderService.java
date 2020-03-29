@@ -1,8 +1,8 @@
 package cn.itcast.order.service.impl;
 
-import cn.itcast.order.entity.Product;
 import cn.itcast.order.service.IOrderService;
 import cn.itcast.order.service.feignclient.ProductFeignClient;
+import cn.itcast.tools.ResultMsg;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
@@ -44,8 +44,8 @@ public class OrderService implements IOrderService {
     @Override
 //    @HystrixCommand(fallbackMethod = "findByIdFallBack") // 开启服务降级
     @HystrixCommand // 配置公共降级方法后，不需要指定特点方法名
-    public Product findById(Long id, int method) {
-        LOGGER.info("orderService findById start, id: {}, method: {}.", id, method);
+    public ResultMsg buyProduct(Long id, int method) {
+        LOGGER.info("orderService buyProduct start, id: {}, method: {}.", id, method);
         switch (method) {
             case 1:
                 return getProductByStaticUrl(url + id);
@@ -63,51 +63,51 @@ public class OrderService implements IOrderService {
     /**
      * 1.通过静态url直接发送rest请求
      */
-    private Product getProductByStaticUrl(String url) {
+    private ResultMsg getProductByStaticUrl(String url) {
         // 1.rest调用
-        return restTemplate.getForObject(url, Product.class);
+        return restTemplate.getForObject(url, ResultMsg.class);
     }
 
     /**
      * 2.通过从注册中心获取元数据，拼接地址
      */
-    private Product getProductByEureka(Long id) {
+    private ResultMsg getProductByEureka(Long id) {
         // 2.从eureka中获取服务元数据
         List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
         ServiceInstance serviceInstance = instances.get(0);
         String newUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/product/" + id;
-        return restTemplate.getForObject(newUrl, Product.class);
+        return restTemplate.getForObject(newUrl, ResultMsg.class);
     }
 
     /**
      * 3.ribbon负载均衡调用
      */
-    private Product getProductByRibbon(Long id) {
+    private ResultMsg getProductByRibbon(Long id) {
         // 3.1 使用@LoadBalanced声明restTemplate
         // 3.2 基于ribbon调用微服务:使用服务名代替IP地址
         String newUrl = "http://service-product/product/" + id;
-        return restTemplate.getForObject(newUrl, Product.class);
+        return restTemplate.getForObject(newUrl, ResultMsg.class);
     }
 
     /**
      * 4.通过feign调用
      */
-    private Product getProductByFeign(Long id) {
+    private ResultMsg getProductByFeign(Long id) {
         // 4.feign发送请求
         return productFeignClient.findById(id);
     }
 
     // 服务降级
-    private Product findByIdFallBack(Long id) {
+    private ResultMsg findByIdFallBack(Long id) {
         LOGGER.error("has error, id: {}.", id);
-        return new Product("触发降级1:method未找到");
+        return ResultMsg.buildFailed("触发降级1:method未找到");
     }
 
     /**
      * 公共的降级方法，不需要入参
      */
-    public Product defaultFallBack() {
+    public ResultMsg defaultFallBack() {
         LOGGER.error("system has error!");
-        return new Product("服务调用失败,触发降级");
+        return ResultMsg.buildFailed("服务调用失败,触发降级");
     }
 }

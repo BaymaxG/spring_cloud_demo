@@ -34,10 +34,7 @@ public class ProductService implements IProductService {
             return ResultMsg.buildFailed();
         }
         Product product = productDao.queryById(id);
-        if (product == null) {
-            product = new Product();
-        }
-        product.setProductName(ip + ":" + port);
+        LOGGER.info("sources: {}.", ip + ":" + port);
         return ResultMsg.buildSuccess(product);
     }
 

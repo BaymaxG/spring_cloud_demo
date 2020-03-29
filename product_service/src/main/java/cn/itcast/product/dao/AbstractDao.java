@@ -61,7 +61,7 @@ public abstract class AbstractDao<T> {
             manager.setFlushMode(FlushModeType.COMMIT);
             return manager;
         } catch (Exception e) {
-            LOGGER.error("getEntityManager failed!");
+            LOGGER.error("getEntityManager failed: No transaction aspect-managed TransactionStatus in scope!");
         }
         entityManager.setFlushMode(FlushModeType.COMMIT);
         return entityManager;
