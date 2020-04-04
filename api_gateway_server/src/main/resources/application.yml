@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway-server # 服务名称
+  # 网关配置
+  cloud:
+    gateway:
+      routes:
+        # 路由id。可以任意
+        - id: service-product
+          # 代理的服务地址,也可以直接从注册中心获取地址 lb://
+          # uri: http://127.0.0.1:9001
+          uri: lb://service-product
+          # 路由断言： 可以匹配映射路径
+          predicates:
+            - Path=/product/**
+#配置客户端,注册到eureka中
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/

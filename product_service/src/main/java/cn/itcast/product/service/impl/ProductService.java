@@ -34,6 +34,9 @@ public class ProductService implements IProductService {
             return ResultMsg.buildFailed();
         }
         Product product = productDao.queryById(id);
+        if (product == null) {
+            return ResultMsg.buildSuccess("未查询到结果");
+        }
         LOGGER.info("sources: {}.", ip + ":" + port);
         return ResultMsg.buildSuccess(product);
     }
