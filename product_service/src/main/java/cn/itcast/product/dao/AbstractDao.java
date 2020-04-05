@@ -1,11 +1,11 @@
 package cn.itcast.product.dao;
 
+import cn.itcast.tools.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.JdbcTransactionObjectSupport;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.DefaultTransactionStatus;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -43,8 +43,8 @@ public abstract class AbstractDao<T> {
         manager.flush();
     }
 
-    public T queryById(Long id) {
-        if (StringUtils.isEmpty(id)) {
+    public T queryById(String id) {
+        if (StringUtil.isNullOrEmpty(id)) {
             return null;
         }
         Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];

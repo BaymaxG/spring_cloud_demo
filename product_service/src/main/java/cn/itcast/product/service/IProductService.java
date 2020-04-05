@@ -1,5 +1,6 @@
 package cn.itcast.product.service;
 
+import cn.itcast.product.dto.ProductQueryDto;
 import cn.itcast.product.entity.Product;
 import cn.itcast.tools.ResultMsg;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,14 @@ import java.util.List;
 @RequestMapping("/product")
 public interface IProductService {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    ResultMsg findById(@PathVariable Long id);
+    ResultMsg findProductById(@PathVariable String id);
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    ResultMsg save(@RequestBody Product product);
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    ResultMsg saveOrUpdateProduct(@RequestBody Product product);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    ResultMsg findAll();
+    ResultMsg findAllProducts();
+
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    ResultMsg findProductsByStatus(@RequestBody ProductQueryDto queryDto);
 }
