@@ -69,7 +69,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ResultMsg findProductsByStatus(ProductQueryDto queryDto) {
+    public ResultMsg findProductsByCondition(ProductQueryDto queryDto) {
         LOGGER.info("[query KPI] findProductsByStatus start, param: {}.", queryDto);
         List<Product> products = productDao.findProducts(queryDto);
         if (!CollectionUtil.isNullOrEmpty(products)) {

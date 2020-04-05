@@ -27,5 +27,5 @@ public interface IProductService {
     ResultMsg findAllProducts();
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    ResultMsg findProductsByStatus(@RequestBody ProductQueryDto queryDto);
+    ResultMsg findProductsByCondition(@RequestBody ProductQueryDto queryDto);
 }
