@@ -13,7 +13,7 @@ public class OrderServiceTest extends DefaultTest {
 
     @Test
     public void testFindById() {
-        ResultMsg resultMsg = orderService.buyProduct((long) 1, 4);
+        ResultMsg resultMsg = orderService.buyProduct("1", 4);
         Assert.assertNotNull(resultMsg);
     }
 }

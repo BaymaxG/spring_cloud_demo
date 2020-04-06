@@ -44,7 +44,7 @@ public class OrderService implements IOrderService {
     @Override
 //    @HystrixCommand(fallbackMethod = "findByIdFallBack") // 开启服务降级
     @HystrixCommand // 配置公共降级方法后，不需要指定特点方法名
-    public ResultMsg buyProduct(Long id, int method) {
+    public ResultMsg buyProduct(String id, int method) {
         LOGGER.info("orderService buyProduct start, id: {}, method: {}.", id, method);
         switch (method) {
             case 1:
@@ -71,7 +71,7 @@ public class OrderService implements IOrderService {
     /**
      * 2.通过从注册中心获取元数据，拼接地址
      */
-    private ResultMsg getProductByEureka(Long id) {
+    private ResultMsg getProductByEureka(String id) {
         // 2.从eureka中获取服务元数据
         List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
         ServiceInstance serviceInstance = instances.get(0);
@@ -82,7 +82,7 @@ public class OrderService implements IOrderService {
     /**
      * 3.ribbon负载均衡调用
      */
-    private ResultMsg getProductByRibbon(Long id) {
+    private ResultMsg getProductByRibbon(String id) {
         // 3.1 使用@LoadBalanced声明restTemplate
         // 3.2 基于ribbon调用微服务:使用服务名代替IP地址
         String newUrl = "http://service-product/product/" + id;
@@ -92,13 +92,13 @@ public class OrderService implements IOrderService {
     /**
      * 4.通过feign调用
      */
-    private ResultMsg getProductByFeign(Long id) {
+    private ResultMsg getProductByFeign(String id) {
         // 4.feign发送请求
         return productFeignClient.findById(id);
     }
 
     // 服务降级
-    private ResultMsg findByIdFallBack(Long id) {
+    private ResultMsg findByIdFallBack(String id) {
         LOGGER.error("has error, id: {}.", id);
         return ResultMsg.buildFailed("触发降级1:method未找到");
     }

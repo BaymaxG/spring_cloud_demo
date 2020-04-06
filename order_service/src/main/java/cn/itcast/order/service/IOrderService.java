@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public interface IOrderService {
     @RequestMapping(value = "/buy/product", method = RequestMethod.GET)
-    ResultMsg buyProduct(@RequestParam("id") Long id, @RequestParam("method") int method);
+    ResultMsg buyProduct(@RequestParam("id") String id, @RequestParam("method") int method);
 }
