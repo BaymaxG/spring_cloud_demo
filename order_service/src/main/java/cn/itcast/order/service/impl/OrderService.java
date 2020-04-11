@@ -2,7 +2,7 @@ package cn.itcast.order.service.impl;
 
 import cn.itcast.order.service.IOrderService;
 import cn.itcast.order.service.feignclient.ProductFeignClient;
-import cn.itcast.tools.ResultMsg;
+import com.baymax.api.dto.ResultMsg;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;

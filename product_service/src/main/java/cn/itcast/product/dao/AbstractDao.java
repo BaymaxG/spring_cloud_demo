@@ -1,6 +1,6 @@
 package cn.itcast.product.dao;
 
-import cn.itcast.tools.utils.StringUtil;
+import com.baymax.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.JdbcTransactionObjectSupport;

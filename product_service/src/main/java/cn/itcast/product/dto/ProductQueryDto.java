@@ -6,7 +6,6 @@ package cn.itcast.product.dto;
 
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public class ProductQueryDto {
 
     private String caption;
 
-    private Date fromDate;
+    private String fromDate;
 
-    private Date endDate;
+    private String endDate;
 }

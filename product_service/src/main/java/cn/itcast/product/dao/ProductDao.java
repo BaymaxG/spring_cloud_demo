@@ -2,8 +2,8 @@ package cn.itcast.product.dao;
 
 import cn.itcast.product.dto.ProductQueryDto;
 import cn.itcast.product.entity.Product;
-import cn.itcast.tools.utils.CollectionUtil;
-import cn.itcast.tools.utils.StringUtil;
+import com.baymax.utils.CollectionUtil;
+import com.baymax.utils.StringUtil;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;

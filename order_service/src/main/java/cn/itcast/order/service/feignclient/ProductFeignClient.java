@@ -1,6 +1,6 @@
 package cn.itcast.order.service.feignclient;
 
-import cn.itcast.tools.ResultMsg;
+import com.baymax.api.dto.ResultMsg;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
