@@ -66,7 +66,7 @@ public class ProductService implements IProductService {
         }
         Product updateResult = productDao.saveOrUpdate(product);
         LOGGER.info("[save KPI] ProductService save end. cost: {}ms.", System.currentTimeMillis() - startTime);
-        return ResultMsg.buildSuccess(updateResult.getId());
+        return ResultMsg.buildSuccess(productDao.queryById(updateResult.getId()));
     }
 
     @Override
