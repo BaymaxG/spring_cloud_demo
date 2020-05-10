@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
+import javax.xml.ws.WebServiceException;
 import java.util.List;
 
 @Service
@@ -55,6 +57,11 @@ public class ProductService implements IProductService {
             }
             if (product.getPrice() != 0) {
                 oldProduct.setPrice(product.getPrice());
+            }
+        } else {
+            if (StringUtils.isEmpty(product.getProductName()) || StringUtil.isNullOrEmpty(product.getStatus())
+                    || product.getPrice() == 0) {
+                return ResultMsg.buildFailed("product is null");
             }
         }
         Product updateResult = productDao.saveOrUpdate(product);
