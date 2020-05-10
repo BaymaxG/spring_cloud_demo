@@ -1,7 +1,9 @@
 package cn.itcast.product.dao;
 
+import cn.itcast.product.common.FilesConstants;
 import cn.itcast.product.dto.ProductQueryDto;
 import cn.itcast.product.entity.Product;
+import com.baymax.api.dao.AbstractDao;
 import com.baymax.utils.CollectionUtil;
 import com.baymax.utils.StringUtil;
 import org.springframework.stereotype.Component;
@@ -36,13 +38,13 @@ public class ProductDao extends AbstractDao<Product> {
 
         List<Predicate> predicates = new ArrayList<>();
         if (!StringUtil.isNullOrEmpty(queryDto.getProductName())) {
-            predicates.add(builder.equal(root.get("productName"), queryDto.getProductName()));
+            predicates.add(builder.equal(root.get(FilesConstants.PRODUCT_NAME), queryDto.getProductName()));
         }
         if (!StringUtil.isNullOrEmpty(queryDto.getCaption())) {
-            predicates.add(builder.equal(root.get("caption"), queryDto.getCaption()));
+            predicates.add(builder.equal(root.get(FilesConstants.CAPTION), queryDto.getCaption()));
         }
         if (!CollectionUtil.isNullOrEmpty(queryDto.getStatus())) {
-            CriteriaBuilder.In<Object> statusIn = builder.in(root.get("status"));
+            CriteriaBuilder.In<Object> statusIn = builder.in(root.get(FilesConstants.STATUS));
             for (String status : queryDto.getStatus()) {
                 statusIn.value(status);
             }
