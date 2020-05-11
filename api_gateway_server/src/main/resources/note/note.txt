@@ -1,0 +1,6 @@
+路由过滤器：
+predicates:
+    # - Path=/product/**
+    - Path=/product-service/**
+    filters:
+    - RewritePath=/product-service/(?<segment>.*), /$\{segment} # 路径重写过滤器，可以将product-service过滤掉

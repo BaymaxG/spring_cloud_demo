@@ -14,7 +14,10 @@ spring:
           uri: lb://service-product
           # 路由断言： 可以匹配映射路径
           predicates:
-            - Path=/product/**
+            # - Path=/product/**
+          - Path=/product-service/**
+          filters:
+          - RewritePath=/product-service/(?<segment>.*), /$\{segment} # 路径重新过滤器
 #配置客户端,注册到eureka中
 eureka:
   client:
