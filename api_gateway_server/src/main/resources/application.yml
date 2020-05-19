@@ -18,6 +18,11 @@ spring:
           - Path=/product-service/**
           filters:
           - RewritePath=/product-service/(?<segment>.*), /$\{segment} # 路径重新过滤器
+          # 自动根据微服务名称路由
+      discovery:
+        locator:
+          enabled: true # 开启根据微服务名称转发
+          lower-case-service-id: true # 服务名称使用小写
 #配置客户端,注册到eureka中
 eureka:
   client:

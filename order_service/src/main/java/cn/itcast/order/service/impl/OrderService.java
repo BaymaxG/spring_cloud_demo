@@ -60,6 +60,11 @@ public class OrderService implements IOrderService {
         }
     }
 
+    @Override
+    public ResultMsg order(String id) {
+        return getProductByFeign(id);
+    }
+
     /**
      * 1.通过静态url直接发送rest请求
      */
