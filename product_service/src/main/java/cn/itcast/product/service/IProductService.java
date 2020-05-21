@@ -1,7 +1,7 @@
 package cn.itcast.product.service;
 
 import cn.itcast.product.dto.ProductQueryDto;
-import cn.itcast.product.entity.Product;
+import cn.itcast.product.entity.product.Product;
 import com.baymax.api.dto.ResultMsg;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

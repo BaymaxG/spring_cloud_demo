@@ -2,7 +2,7 @@ package cn.itcast.product.service.impl;
 
 import cn.itcast.product.dao.ProductDao;
 import cn.itcast.product.dto.ProductQueryDto;
-import cn.itcast.product.entity.Product;
+import cn.itcast.product.entity.product.Product;
 import cn.itcast.product.service.IProductService;
 import com.baymax.api.dto.ResultMsg;
 import com.baymax.utils.CollectionUtil;

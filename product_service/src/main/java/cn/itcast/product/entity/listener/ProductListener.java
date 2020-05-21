@@ -6,7 +6,7 @@ package cn.itcast.product.entity.listener;
 
 import cn.itcast.product.common.Constant;
 import cn.itcast.product.common.ConstantEnum;
-import cn.itcast.product.entity.Product;
+import cn.itcast.product.entity.product.Product;
 import com.baymax.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

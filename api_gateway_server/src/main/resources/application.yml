@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: api-gateway-server # 服务名称
+  redis:
+    host: localhost
+    pool: 6379
+    database: 0
   # 网关配置
   cloud:
     gateway:

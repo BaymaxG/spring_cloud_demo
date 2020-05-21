@@ -1,4 +1,4 @@
-package cn.itcast.product.entity;
+package cn.itcast.product.entity.product;
 
 import cn.itcast.product.entity.listener.ProductListener;
 import com.baymax.entity.BaseEntity;

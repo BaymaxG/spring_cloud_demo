@@ -2,7 +2,7 @@ package cn.itcast.product.dao;
 
 import cn.itcast.product.common.FilesConstants;
 import cn.itcast.product.dto.ProductQueryDto;
-import cn.itcast.product.entity.Product;
+import cn.itcast.product.entity.product.Product;
 import com.baymax.api.dao.AbstractDao;
 import com.baymax.utils.CollectionUtil;
 import com.baymax.utils.StringUtil;

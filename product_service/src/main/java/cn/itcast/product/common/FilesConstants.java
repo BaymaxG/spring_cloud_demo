@@ -18,4 +18,8 @@ public class FilesConstants {
     public static final String CAPTION = "caption";
 
     public static final String STATUS = "status";
+
+    public static final String CREATE_DATE = "createDate";
+
+    public static final String LAST_UPDATE_DATE = "lastUpdateDate";
 }
