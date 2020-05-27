@@ -65,6 +65,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--引入测试框架-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.19</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
