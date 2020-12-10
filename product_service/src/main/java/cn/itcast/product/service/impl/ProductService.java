@@ -1,5 +1,6 @@
 package cn.itcast.product.service.impl;
 
+import cn.itcast.product.common.Constant;
 import cn.itcast.product.dao.ProductDao;
 import cn.itcast.product.dto.ProductQueryDto;
 import cn.itcast.product.entity.product.Product;
@@ -17,8 +18,12 @@ import org.springframework.util.StringUtils;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * @author Baymax
+ */
 @Service
-public class ProductService implements IProductService {
+@Transactional
+public class ProductService implements IProductService<Product> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
 
     @Autowired
@@ -63,6 +68,8 @@ public class ProductService implements IProductService {
                     || product.getPrice() == 0) {
                 return ResultMsg.buildFailed("product is null");
             }
+            // 默认有效
+            product.setStatus(Constant.YES);
         }
         Product updateResult = productDao.saveOrUpdate(product);
         LOGGER.info("[save KPI] ProductService save end. cost: {}ms.", System.currentTimeMillis() - startTime);
@@ -84,5 +91,20 @@ public class ProductService implements IProductService {
         } else {
             return ResultMsg.buildSuccess("查询结果为空");
         }
+    }
+
+    @Override
+    public ResultMsg saveAll(List<Product> products) {
+        for (int i = 0; i < 10000; i++) {
+            Product product = new Product();
+            product.setPrice(1000.0);
+            product.setStatus("1");
+            product.setProductName("测试数据");
+            product.setCaption("就卡死不见喀什地方");
+            product.setInventory(2000);
+            products.add(product);
+        }
+        productDao.saveAll(products);
+        return ResultMsg.buildSuccess(products.size());
     }
 }

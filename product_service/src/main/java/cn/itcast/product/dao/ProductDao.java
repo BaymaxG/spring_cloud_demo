@@ -1,5 +1,6 @@
 package cn.itcast.product.dao;
 
+import cn.itcast.product.common.Constant;
 import cn.itcast.product.common.FilesConstants;
 import cn.itcast.product.dto.ProductQueryDto;
 import cn.itcast.product.entity.product.Product;
@@ -25,7 +26,7 @@ public class ProductDao extends AbstractDao<Product> {
         CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
         Root<Product> root = criteria.from(Product.class);
         criteria.select(root);
-        return getEntityManager().createQuery(criteria).getResultList();
+        return getEntityManager().createQuery(criteria).setMaxResults(Constant.MAX).getResultList();
     }
 
     public List<Product> findProducts(ProductQueryDto queryDto) {

@@ -3,7 +3,7 @@ server:
 spring:
   application:
     name: service-order
-myUrl: http://localhost:9001/product/
+myUrl: http://localhost:60004/product/
 logging:
   level:
     root: debug

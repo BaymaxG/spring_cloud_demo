@@ -55,7 +55,7 @@ public class StudyProcessService implements IStudyProcessService {
             // 计划时间默认往后推一天
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(new Date());
-            calendar.add(calendar.DATE, 1);
+            calendar.add(Calendar.DATE, 1);
             studyProcess.setCompletedDate(calendar.getTime());
             studyProcess.setStatus(StudyProcessStatusEnum.START.getCode());
         } else {

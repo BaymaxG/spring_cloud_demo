@@ -5,6 +5,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringCloudApplication
 @EnableFeignClients // 1.引入依赖，2.激活feign
+//@ComponentScan(basePackages = {"cn.itcast.**"})
 public class OrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderApplication.class, args);
